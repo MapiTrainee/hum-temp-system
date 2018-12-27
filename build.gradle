@@ -34,7 +34,7 @@ dependencies {
 
 def prodProfiles='prod'
 def devProfiles='dev'
-def propertyDrivenProfiles = devProfiles;
+def propertyDrivenProfiles='none'
  
 if (project.hasProperty('prod')) {
     propertyDrivenProfiles = prodProfiles
