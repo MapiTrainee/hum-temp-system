@@ -27,7 +27,6 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation('org.springframework.boot:spring-boot-starter-security')
     implementation('org.springframework.boot:spring-boot-starter-web')
-    implementation('org.flywaydb:flyway-core')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation('org.springframework.security:spring-security-test')
 }
@@ -43,10 +42,21 @@ if (project.hasProperty('prod')) {
     propertyDrivenProfiles = devProfiles
     apply from: rootProject.file('profile_dev.gradle');
 } 
-println 'Using profile: "' + propertyDrivenProfiles + '" for ' + project.getName()
 
 bootRun {
     systemProperties = [
         'spring.profiles.active': propertyDrivenProfiles
     ]
 }
+
+bootJar {
+    mainClassName = 'eu.mapidev.pi.htsystem.HumTempSystemApplication'
+}
+
+test {
+    systemProperties = [
+        'spring.profiles.active': propertyDrivenProfiles
+    ]
+}
+
+println 'Using profile: "' + propertyDrivenProfiles + '" for ' + project.getName()

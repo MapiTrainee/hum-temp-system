@@ -1,4 +1,4 @@
-package eu.mapidev.pi.htsystem.HumTempSystem;
+package eu.mapidev.pi.htsystem.config;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
