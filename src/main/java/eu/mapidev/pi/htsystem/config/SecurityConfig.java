@@ -2,6 +2,7 @@ package eu.mapidev.pi.htsystem.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,7 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 	http.authorizeRequests()
 		.antMatchers("/profile").hasRole("ADMIN")
-		.antMatchers("/console/**").hasAnyRole("ADMIN")
+		.antMatchers("/console/**").hasRole("ADMIN")
+		.antMatchers(HttpMethod.GET, "/measurement/**").permitAll()
 		.antMatchers("/").permitAll()
 		.anyRequest().authenticated()
 		.and().formLogin().permitAll()
