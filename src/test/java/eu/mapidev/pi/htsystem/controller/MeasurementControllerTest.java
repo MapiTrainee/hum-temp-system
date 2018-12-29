@@ -7,8 +7,10 @@ import eu.mapidev.pi.htsystem.service.MeasurementService;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import org.hamcrest.Matchers;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -94,7 +96,10 @@ public class MeasurementControllerTest {
 
 	mockMvc.perform(post("/measurement/").contentType(MediaType.APPLICATION_JSON)
 		.content(parseMeasurement()).with(testUser()).with(csrf()))
-		.andExpect(status().isCreated());
+		.andExpect(status().isCreated())
+		.andExpect(jsonPath("temperatureInCelcius", is(measurement.getTemperatureInCelcius())))
+		.andExpect(jsonPath("humidityPercentage", is(measurement.getHumidityPercentage())))
+		.andExpect(jsonPath("date", notNullValue()));
     }
 
     @Test
@@ -103,7 +108,10 @@ public class MeasurementControllerTest {
 
 	mockMvc.perform(put("/measurement/" + SAMPLE_DATE_AS_TIMESTAMP).contentType(MediaType.APPLICATION_JSON)
 		.content(parseMeasurement()).with(testUser()).with(csrf()))
-		.andExpect(status().isOk());
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("temperatureInCelcius", is(measurement.getTemperatureInCelcius())))
+		.andExpect(jsonPath("humidityPercentage", is(measurement.getHumidityPercentage())))
+		.andExpect(jsonPath("date", is(SAMPLE_DATE_AS_STRING)));
     }
 
     @Test

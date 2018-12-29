@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class MeasurementController {
 
     @Autowired
@@ -39,7 +39,7 @@ public class MeasurementController {
 
     @PostMapping("/measurement")
     public ResponseEntity<?> createMeasurement(@RequestBody Measurement measurement) {
-	return new ResponseEntity<>(HttpStatus.CREATED);
+	return new ResponseEntity<>(measurementService.createMeasurement(measurement), HttpStatus.CREATED);
     }
 
     @PutMapping("/measurement/{timestamp}")
