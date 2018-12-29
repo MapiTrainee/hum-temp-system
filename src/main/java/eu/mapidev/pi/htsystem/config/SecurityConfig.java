@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/").permitAll()
 		.anyRequest().authenticated()
 		.and().formLogin().permitAll()
-		.and().csrf().ignoringAntMatchers("/console/**")
+		.and().csrf().ignoringAntMatchers("/console/**").ignoringAntMatchers("/measurement/**")
 		.and().headers().frameOptions().sameOrigin();
     }
 }

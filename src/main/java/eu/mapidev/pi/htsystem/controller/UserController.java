@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class UserController {
 
-    @RequestMapping("/**")
+    @RequestMapping("/user")
     @ResponseBody
     public String handler(HttpServletRequest request) {
 	Authentication auth = SecurityContextHolder.getContext()
