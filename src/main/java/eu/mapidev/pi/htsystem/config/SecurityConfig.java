@@ -1,6 +1,7 @@
 package eu.mapidev.pi.htsystem.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,9 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/profile").hasRole("ADMIN")
 		.antMatchers("/console/**").hasRole("ADMIN")
 		.antMatchers(HttpMethod.GET, "/measurement/**").permitAll()
+		.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 		.antMatchers("/").permitAll()
 		.anyRequest().authenticated()
-		.and().formLogin().permitAll()
+		.and().httpBasic()
 		.and().csrf().ignoringAntMatchers("/console/**").ignoringAntMatchers("/measurement/**")
 		.and().headers().frameOptions().sameOrigin();
     }

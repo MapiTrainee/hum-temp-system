@@ -151,7 +151,7 @@ public class MeasurementServiceImplTest {
 	//then
 	assertThat(allMeasurements.size()).isLessThanOrEqualTo(LIMIT);
 	assertThat(updatedMeasurement.getHumidityPercentage()).isNotEqualTo(firstMeasurement.getHumidityPercentage());
-	assertThat(updatedMeasurement.getTemperatureInCelcius()).isNotEqualTo(firstMeasurement.getTemperatureInCelcius());
+	assertThat(updatedMeasurement.getTemperatureInCelsius()).isNotEqualTo(firstMeasurement.getTemperatureInCelsius());
 	assertThat(allMeasurements).asList().contains(updatedMeasurement);
     }
 

@@ -7,7 +7,6 @@ import eu.mapidev.pi.htsystem.service.MeasurementService;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import org.hamcrest.Matchers;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -52,7 +51,7 @@ public class MeasurementControllerTest {
 	measurement = new Measurement();
 	measurement.setDate(new Date(SAMPLE_DATE_AS_TIMESTAMP));
 	measurement.setHumidityPercentage(50);
-	measurement.setTemperatureInCelcius(30);
+	measurement.setTemperatureInCelsius(30);
     }
 
     @Test
@@ -64,7 +63,7 @@ public class MeasurementControllerTest {
 		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$", hasSize(1)))
-		.andExpect(jsonPath("$[0].temperatureInCelcius", is(measurement.getTemperatureInCelcius())))
+		.andExpect(jsonPath("$[0].temperatureInCelsius", is(measurement.getTemperatureInCelsius())))
 		.andExpect(jsonPath("$[0].humidityPercentage", is(measurement.getHumidityPercentage())))
 		.andExpect(jsonPath("$[0].date", is(SAMPLE_DATE_AS_STRING)));
     }
@@ -76,7 +75,19 @@ public class MeasurementControllerTest {
 	mockMvc.perform(get("/measurement/" + SAMPLE_DATE_AS_TIMESTAMP))
 		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 		.andExpect(status().isOk())
-		.andExpect(jsonPath("temperatureInCelcius", is(measurement.getTemperatureInCelcius())))
+		.andExpect(jsonPath("temperatureInCelsius", is(measurement.getTemperatureInCelsius())))
+		.andExpect(jsonPath("humidityPercentage", is(measurement.getHumidityPercentage())))
+		.andExpect(jsonPath("date", is(SAMPLE_DATE_AS_STRING)));
+    }
+
+    @Test
+    public void shouldGetLastMeasurement() throws Exception {
+	given(service.getLastMeasurement()).willReturn(measurement);
+
+	mockMvc.perform(get("/measurement/last"))
+		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("temperatureInCelsius", is(measurement.getTemperatureInCelsius())))
 		.andExpect(jsonPath("humidityPercentage", is(measurement.getHumidityPercentage())))
 		.andExpect(jsonPath("date", is(SAMPLE_DATE_AS_STRING)));
     }
@@ -97,7 +108,7 @@ public class MeasurementControllerTest {
 	mockMvc.perform(post("/measurement/").contentType(MediaType.APPLICATION_JSON)
 		.content(parseMeasurement()).with(testUser()).with(csrf()))
 		.andExpect(status().isCreated())
-		.andExpect(jsonPath("temperatureInCelcius", is(measurement.getTemperatureInCelcius())))
+		.andExpect(jsonPath("temperatureInCelsius", is(measurement.getTemperatureInCelsius())))
 		.andExpect(jsonPath("humidityPercentage", is(measurement.getHumidityPercentage())))
 		.andExpect(jsonPath("date", notNullValue()));
     }
@@ -109,7 +120,7 @@ public class MeasurementControllerTest {
 	mockMvc.perform(put("/measurement/" + SAMPLE_DATE_AS_TIMESTAMP).contentType(MediaType.APPLICATION_JSON)
 		.content(parseMeasurement()).with(testUser()).with(csrf()))
 		.andExpect(status().isOk())
-		.andExpect(jsonPath("temperatureInCelcius", is(measurement.getTemperatureInCelcius())))
+		.andExpect(jsonPath("temperatureInCelsius", is(measurement.getTemperatureInCelsius())))
 		.andExpect(jsonPath("humidityPercentage", is(measurement.getHumidityPercentage())))
 		.andExpect(jsonPath("date", is(SAMPLE_DATE_AS_STRING)));
     }

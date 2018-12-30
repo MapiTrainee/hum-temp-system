@@ -17,7 +17,7 @@ public class Measurement {
     private Date date;
 
     @Column(nullable = false, name = "temp")
-    private int temperatureInCelcius;
+    private int temperatureInCelsius;
 
     @Column(nullable = false, name = "hum")
     private int humidityPercentage;
@@ -25,9 +25,9 @@ public class Measurement {
     public Measurement() {
     }
 
-    public Measurement(Date date, int temperatureInCelcius, int humidityPercentage) {
+    public Measurement(Date date, int temperatureInCelsius, int humidityPercentage) {
 	this.date = date;
-	this.temperatureInCelcius = temperatureInCelcius;
+	this.temperatureInCelsius = temperatureInCelsius;
 	this.humidityPercentage = humidityPercentage;
     }
 
@@ -39,12 +39,12 @@ public class Measurement {
 	this.date = date;
     }
 
-    public int getTemperatureInCelcius() {
-	return temperatureInCelcius;
+    public int getTemperatureInCelsius() {
+	return temperatureInCelsius;
     }
 
-    public void setTemperatureInCelcius(int temperatureInCelcius) {
-	this.temperatureInCelcius = temperatureInCelcius;
+    public void setTemperatureInCelsius(int temperatureInCelsius) {
+	this.temperatureInCelsius = temperatureInCelsius;
     }
 
     public int getHumidityPercentage() {
@@ -81,7 +81,7 @@ public class Measurement {
     }
 
     public String toString() {
-	return "Measurement{" + "date=" + date.getTime() + ", temperatureInCelcius=" + temperatureInCelcius + ", humidityPercentage=" + humidityPercentage + '}';
+	return "Measurement{" + "date=" + date.getTime() + ", temperatureInCelsius=" + temperatureInCelsius + ", humidityPercentage=" + humidityPercentage + '}';
     }
 
 }

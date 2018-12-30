@@ -1,3 +1,4 @@
 dependencies {
-    runtimeOnly('org.postgresql:postgresql')
+    //runtimeOnly('org.postgresql:postgresql')
+    runtimeOnly('mysql:mysql-connector-java')
 }

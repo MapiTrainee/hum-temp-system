@@ -15,7 +15,7 @@ public class MeasurementServiceImpl implements MeasurementService {
 
     @Override
     public List<Measurement> getAllMeasurements() {
-	return repository.findAllByOrderByDateDesc();
+	return (List<Measurement>) repository.findAll();
     }
 
     @Override
@@ -46,7 +46,7 @@ public class MeasurementServiceImpl implements MeasurementService {
     public Measurement updateMeasurement(Date date, Measurement measurement) {
 	Measurement updatedMeasurement = getMeasurementByDate(date);
 	updatedMeasurement.setHumidityPercentage(measurement.getHumidityPercentage());
-	updatedMeasurement.setTemperatureInCelcius(measurement.getTemperatureInCelcius());
+	updatedMeasurement.setTemperatureInCelsius(measurement.getTemperatureInCelsius());
 	return repository.save(updatedMeasurement);
     }
 

@@ -36,6 +36,12 @@ public class MeasurementController {
     public Measurement listMeasurement(@PathVariable("timestamp") Long timestamp) {
 	return measurementService.getMeasurementByDate(new Date(timestamp));
     }
+    
+    @GetMapping("/measurement/last")
+    @ResponseBody
+    public Measurement listLastMeasurement() {
+	return measurementService.getLastMeasurement();
+    }
 
     @PostMapping("/measurement")
     public ResponseEntity<?> createMeasurement(@RequestBody Measurement measurement) {
