@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <link rel="icon" href="/favicon.ico?v=1.1"/> 
+
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="css/main.css" rel="stylesheet" type="text/css"/>
+
+        <title>Humidity Temperature System</title>
+    </head>
+    <body id="grad1">
+        <div class="container text-center text-white">
+            <h1 class="light-text" style="margin: 50px 0 50px 0;">HUMIDITY TEMPERATURE SYSTEM</h1>
+            <div class="hr"></div>
+
+            <div style="margin-top:20px;">
+                <h5>LAST MEASUREMENT TIME</h5>
+                <h3 id="time" class="light-text">14:00:08 25.12.2018</h3>
+            </div>
+
+            <div class="row text-center">
+                <div style="padding-top:40px;"  class="col-md-4 offset-md-2">
+                    <div class="panel panel-primary text-primary">
+                        <h1 class="light-text">HUM [%]</h1>
+                        <span id="hum">50</span>
+                    </div>
+                </div>
+                <div style="padding-top:40px;" class="col-md-4">
+                    <div class="panel panel-danger text-danger">
+                        <h1 class="light-text">TEMP [&deg;C]</h1>
+                        <span id="temp">20</span>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:40px;" class="panel panel-default">
+                <h5>LAST MEASUREMENTS CHART</h5>
+                <div id="chart" style="height: 420px">
+                </div>
+            </div>
+            <div style="margin-top: 60px;" class="hr"></div>
+        </div>
+        <footer style="color:white; margin: 30px 0 20px 0;" class="text-center"><a class="text-white" href="http://github.com/MapiTrainee">MapiTrainee</a> © Copyright 2018</footer>
+    </div>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/counter.js"></script>
+    <script src="js/dygraphs.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
