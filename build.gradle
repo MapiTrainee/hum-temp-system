@@ -38,12 +38,12 @@ def prodProfiles='prod'
 def devProfiles='dev'
 def propertyDrivenProfiles='none'
  
-if (project.hasProperty('prod')) {
-    propertyDrivenProfiles = prodProfiles
-    apply from: rootProject.file('profile_prod.gradle');
-} else if (project.hasProperty('dev')) {
+if (project.hasProperty('dev')) {
     propertyDrivenProfiles = devProfiles
     apply from: rootProject.file('profile_dev.gradle');
+} else {
+    propertyDrivenProfiles = prodProfiles
+    apply from: rootProject.file('profile_prod.gradle');
 } 
 
 bootRun {

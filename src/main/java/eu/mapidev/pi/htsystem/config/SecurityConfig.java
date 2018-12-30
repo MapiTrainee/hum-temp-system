@@ -1,6 +1,7 @@
 package eu.mapidev.pi.htsystem.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -13,11 +14,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final String ENCODED_SECRET = "{bcrypt}$2a$10$3HIDKuRhkj1ptK045z6T7.xk29qtpxGXmIGtwloLzTDe1aX87/5.K";
+    private final String encodedSecret;
+
+    public SecurityConfig(@Value("${app.admin.secret}") String encodedSecret) {
+	this.encodedSecret = encodedSecret;
+    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-	auth.inMemoryAuthentication().withUser("admin").password(ENCODED_SECRET).roles("ADMIN");
+	auth.inMemoryAuthentication().withUser("admin").password(encodedSecret).roles("ADMIN");
     }
 
     @Override
