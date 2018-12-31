@@ -5,10 +5,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -34,18 +33,18 @@ public class SecurityConfigTest {
     public void anonymousShouldNotBeAbleToGetToTheAdminResources() throws Exception {
 	mockMvc.perform(get("/console"))
 		.andExpect(unauthenticated())
-		.andExpect(status().is3xxRedirection());
+		.andExpect(status().is4xxClientError());
     }
 
     @Test
     public void adminShouldBeAbleToLogIn() throws Exception {
-	mockMvc.perform(formLogin().user("admin").password("admin"))
+	mockMvc.perform(get("/user").with(httpBasic("admin", "admin")))
 		.andExpect(authenticated());
     }
 
     @Test
     public void otherUserShouldNotBeAbleToLogIn() throws Exception {
-	mockMvc.perform(formLogin().user("user").password("user"))
-		.andExpect(unauthenticated());
+	mockMvc.perform(get("/user").with(httpBasic("admin", "admin")))
+		.andExpect(authenticated());
     }
 }
