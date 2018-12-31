@@ -5,7 +5,6 @@ var tempView = $('#temp');
 var timeView = $('#time');
 var chartView = $('#chart');
 
-
 function getLastMeasurement() {
     return $.ajax({
         url: '/measurement/last',
@@ -111,7 +110,7 @@ function renderLastMeasurementView(data) {
     humView.text(data['humidityPercentage']);
     tempView.text(data['temperatureInCelsius']);
     var date = new Date(data['date']);
-    timeView.text(date.toLocaleTimeString());
+    timeView.text(date.toLocaleDateString() + ' ' + date.toLocaleTimeString());
 
     transform_number($('#hum'), 300, 'flex');
     transform_number($('#temp'), 300, 'flex');
