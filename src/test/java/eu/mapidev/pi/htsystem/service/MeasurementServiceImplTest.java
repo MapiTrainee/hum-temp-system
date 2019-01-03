@@ -50,6 +50,7 @@ public class MeasurementServiceImplTest {
 
 	//then
 	assertThat(allMeasurements.size()).isEqualTo(LENGTH);
+	assertThat(allMeasurements).asList().containsExactlyElementsOf(Arrays.asList(measurements));
     }
 
     @Test

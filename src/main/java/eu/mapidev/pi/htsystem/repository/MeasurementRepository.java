@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MeasurementRepository extends CrudRepository<Measurement, Date> {
 
-    public List<Measurement> findAllByOrderByDateDesc();
+    public List<Measurement> findAllByOrderByDateAsc();
 
     public List<Measurement> findFirstByOrderByDateDesc();
     

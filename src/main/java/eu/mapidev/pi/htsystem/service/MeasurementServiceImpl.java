@@ -15,7 +15,7 @@ public class MeasurementServiceImpl implements MeasurementService {
 
     @Override
     public List<Measurement> getAllMeasurements() {
-	return (List<Measurement>) repository.findAll();
+	return repository.findAllByOrderByDateAsc();
     }
 
     @Override
